@@ -1,0 +1,8 @@
+FROM ubuntu:24.04
+RUN apt-get update
+# import openjdk-17-jdk
+RUN apt-get install -y openjdk-17-jdk
+ENV FILE_NAME=main.java
+VOLUME /app
+WORKDIR /app
+ENTRYPOINT javac $FILE_NAME && java Main
