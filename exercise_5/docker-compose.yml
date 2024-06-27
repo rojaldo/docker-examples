@@ -1,0 +1,21 @@
+version: "3"
+services:
+  client:
+    image: ubuntu:24.04
+    command: tail -f /dev/null
+    depends_on:
+      - server
+    networks:
+      - sample_network
+  server:
+    image: nginx:1.19.0
+    ports:
+      - "8085:80"
+    volumes:
+      - ./html:/usr/share/nginx/html
+    networks:
+      - sample_network
+
+networks:
+  sample_network:
+    driver: bridge

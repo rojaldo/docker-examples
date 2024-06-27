@@ -1,0 +1,31 @@
+# version: "3.7"
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./html:/usr/share/nginx/html
+    networks:
+      - my_network
+    environment:
+      FLASK_ENV: development
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: flask_db
+      MYSQL_USER: flask_user
+      MYSQL_PASSWORD: flask_password
+    ports:
+      - "3307:3306"
+    volumes:
+      - my_db_data:/var/lib/mysql
+    networks:
+      - my_network
+volumes:
+  my_db_data:
+networks:
+  my_network:
+
+  
